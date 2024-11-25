@@ -11,7 +11,18 @@ def main():
     clock = pygame.time.Clock()
     dt = 0
     
+    updatable = pygame.sprite.Group()
+    drawable = pygame.sprite.Group()
+    
+    Player.cotainers = (updatable, drawable)
+    # I am not sure how to get the line above to work so I am doing it manually for now ! Check on this
+    
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
+    
+    updatable.add(player)
+    drawable.add(player)
+    
+    print(updatable.sprites())
     
     while True:
         for event in pygame.event.get():
@@ -19,8 +30,12 @@ def main():
                 return
         screen.fill(0x000000)
         
-        player.update(dt)
-        player.draw(screen)
+        
+        for update in updatable:
+            update.update(dt)
+            
+        for draw in drawable:
+            draw.draw(screen)
         
         pygame.display.flip()
         temp_dt = clock.tick(60)
