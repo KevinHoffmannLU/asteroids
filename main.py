@@ -7,12 +7,17 @@ def main():
         raise Exception("Constants not imported")
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     
+    clock = pygame.time.Clock()
+    dt = 0
+    
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return
         screen.fill(0x000000)
         pygame.display.flip()
+        temp_dt = clock.tick(60)
+        dt = temp_dt / 1000
     
     print("Starting asteroids!")
     print(f"Screen width: {SCREEN_WIDTH}")
