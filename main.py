@@ -2,6 +2,18 @@ import pygame
 from constants import *
 
 def main():
+    pygame.init()
+    if not SCREEN_HEIGHT or not SCREEN_WIDTH:
+        raise Exception("Constants not imported")
+    screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+    
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                return
+        screen.fill(0x000000)
+        pygame.display.flip()
+    
     print("Starting asteroids!")
     print(f"Screen width: {SCREEN_WIDTH}")
     print(f"Screen height: {SCREEN_HEIGHT}")
