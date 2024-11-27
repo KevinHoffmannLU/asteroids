@@ -32,6 +32,10 @@ def main():
     print(updatable.sprites())
     
     while True:
+        print("Starting asteroids!")
+        print(f"Screen width: {SCREEN_WIDTH}")
+        print(f"Screen height: {SCREEN_HEIGHT}")
+    
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return
@@ -43,14 +47,15 @@ def main():
             
         for draw in drawable:
             draw.draw(screen)
+            
+        for asteroid in asteroids:
+            if asteroid.collision_check(player):
+                print("Game over!")
+                return
         
         pygame.display.flip()
         temp_dt = clock.tick(60)
         dt = temp_dt / 1000
-    
-    print("Starting asteroids!")
-    print(f"Screen width: {SCREEN_WIDTH}")
-    print(f"Screen height: {SCREEN_HEIGHT}")
     
 if __name__ == "__main__":
     main()
